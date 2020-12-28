@@ -5,8 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link type="text/css" rel="stylesheet" href="css/rex.css"/>
+    <link type="text/css" rel="stylesheet" href="css/index.css"/>
 </head>
 <body>
-    <h1>Hello rex</h1>
+    <div id="mainContainer" class="rex-height-100vh">
+        <div class="rex-width-40pp rex-height-100vh rex-float-left rex-background-primary rex-pad32px">
+            <div class="rex-height-10pp rex-display-flex rex-center-vertical-flex-items">
+                <a href="index.html">
+                    <span class="rex-fs-large rex-color-white rex-weight-bold"><span class="rex-color-primary">G</span>Ring</span>
+                </a>
+            </div>
+            <div class="rex-height-80pp rex-display-flex rex-center-vertical-flex-items">
+                <div class="rex-color-white">
+                    <h1 class="rex-fs-extra-large">Sign In</h1>
+
+                    <div class="rex-space-32px"></div>
+
+                    <div class="rex-mt-16px">
+                        <label class="rex-fs-normal rex-weight-bold rex-color-gray" for="emailInput">Email</label>
+                        <input type="email" id="emailInput" class="rex-width-100pp rex-pad16px rex-fs-normal rex-mt-8px rex-background-transparent rex-curDiv-4px rex-color-white rex-weight-bold rex-border-gray custom-input-focus" placeholder="Enter your email"/>
+                    </div>
+
+                    <div class="rex-space-8px"></div>
+
+                    <div class="rex-mt-16px">
+                        <label class="rex-fs-normal rex-weight-bold rex-color-gray" for="passwordInput">Password</label>
+                        <input type="password" id="passwordInput" class="rex-width-100pp rex-pad16px rex-fs-normal rex-mt-8px rex-background-transparent rex-curDiv-4px rex-color-white rex-weight-bold rex-border-gray custom-input-focus" placeholder="Enter your password"/>
+                    </div>
+                    
+                    <div class="rex-space-32px"></div>
+
+                    <a class="rex-mt-32px rex-hover rex-color-gray rex-text-underline rex-fs-normal" href="forgottenPassword.html">FORGOTTEN PASSWORD</a>
+
+                    <div class="rex-space-32px"></div>
+
+                    <button id="loginButton" class="rex-width-100pp rex-pad16px rex-button-primary">SIGN IN</button>
+
+                    <div class="rex-space-16px"></div>
+
+                    <p id="errorMessage" class="rex-display-gone rex-center-text rex-color-red rex-fs-normal">Incorrect login details</p>
+                </div>
+            </div>
+            <div class="rex-height-10pp rex-display-flex rex-center-vertical-flex-items">
+                <p class="rex-fs-normal rex-color-white">Don't have an account? <a class="rex-hover rex-color-primary" href="signup.html">Sign up</a></p>
+            </div>
+        </div>
+        <div class="rex-width-60pp rex-height-100vh rex-float-left rex-background-secondary"></div>
+    </div>
+
+    <div id="progressContainer" class="rex-height-100vh rex-display-flex rex-center-flex-items rex-color-white rex-fs-normal">Please wait...</div>
 </body>
 </html>
