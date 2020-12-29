@@ -2,38 +2,26 @@ import * as utils from './rex.js';
 import {WEBSITE_URL} from './consts.js';
 
 window.onload = () => {
-    setSigninButtonClickListener();
+    setPrimaryButtonClickListener();
 }
 
-function setSigninButtonClickListener(){
-	getLoginButton().onclick = buttonClick;
+function setPrimaryButtonClickListener(){
+    getPrimaryButton().onclick = buttonClick;
 
-	getEmailInput().addEventListener("keyup", keypressEvent);
-	getPasswordInput().addEventListener("keyup", keypressEvent);
-}
-
-function keypressEvent(event){
-	event.preventDefault();
-	if(event.keyCode === 13){
-		buttonClick();
-	}
+	getInput().addEventListener("keyup", (event) => {
+		event.preventDefault();
+		if(event.keyCode === 13){
+			buttonClick();
+		}
+	});
 }
 
 function buttonClick(){
-	let email = getEmailInput().value.toLowerCase().trim();
-	let password = getPasswordInput().value;
+	let email = getInput().value.toLowerCase().trim();
 
 	if(email){
 		if(utils.isEmailValid(email)){
-			if(password){
-				if(password.length >= 6){
-					signin(email, password);
-				}else{
-					showError("Password should be at least 6 characters");
-				}
-			}else{
-				showError("Please enter your password");
-			}
+			sendCode(email);
 		}else{
 			showError("Email is not correct");
 		}
@@ -42,24 +30,24 @@ function buttonClick(){
 	}
 }
 
-function signin(email, password){
+function sendCode(email){
 	
 	getMainContainer().style.display = "none";
 	getProgressContainer().style.display = "flex";
     
-    let url = `${WEBSITE_URL}/signin?email=${email}&password=${password}`;
+    let url = `${WEBSITE_URL}/forgottenPassword?email=${email}`;
 
 	utils.sendGetRequest(url)
 	.then(json => {
 		if(json.status == "success"){
-			sessionStorage.setItem("userId", json.id);
-			sessionStorage.setItem("isNewUser", 0);
+			sessionStorage.setItem("email", email);
 			getProgressContainer().style.display = "none";
-			window.open("dashboard.html", "_self");
+			window.open("forgottenPasswordVerification.html", "_self");
 		}else{
-			getMainContainer().style.display = "block";
+			getMainContainer().style.display = "flex";
 			getProgressContainer().style.display = "none";
-			showError(json.error, 5000);
+            showError(json.error, 5000);
+            getInput().focus();
 		}
 	}).catch(err => {
 		console.error(err);
@@ -75,25 +63,26 @@ function showError(error, duration = 3000){
     });
 }
 
-function getEmailInput(){
+function getInput(){
 	return document.getElementById("emailInput");
 }
 
-function getPasswordInput(){
-	return document.getElementById("passwordInput");
-}
-
-function getLoginButton(){
-	return document.getElementById("loginButton");
+function getPrimaryButton(){
+	return document.getElementById("primaryButton");
 }
 
 function getErrorMessage(){
 	return document.getElementById("errorMessage");
 }
 
+function getResendLink(){
+	return document.getElementById("resend");
+}
+
 function getMainContainer(){
 	return document.getElementById("mainContainer");
 }
+
 
 function getProgressContainer(){
 	return document.getElementById("progressContainer");

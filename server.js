@@ -11,7 +11,10 @@ server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 app.use(express.static("public"));
 
 const signinRouter = require("./routes/signIn");
-app.use("/", signinRouter);
+app.use("/signin", signinRouter);
+
+const forgottenPasswordRouter = require("./routes/forgottenPassword");
+app.use("/forgottenPassword", forgottenPasswordRouter);
 
 //database connection
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/phone-gring";

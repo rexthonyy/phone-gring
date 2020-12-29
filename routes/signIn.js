@@ -3,8 +3,8 @@ const router = express.Router();
 const User = require('../models/users');
 
 // Sign in authentication
-router.post('/', (req, res) => {
-    User.findOne({ email: req.body.email, password: req.body.password }, '_id', (err, doc) => {
+router.get('/', (req, res) => {
+    User.findOne({ email: req.query.email, password: req.query.password }, '_id', (err, doc) => {
         if(err) {
             res.json(err);
         } 
